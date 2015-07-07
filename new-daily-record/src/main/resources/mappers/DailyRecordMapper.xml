@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="onlyfun.js.dao.DailyRecordMapper">
+  <resultMap id="BaseResultMap" type="onlyfun.js.domain.DailyRecord">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="task_id" jdbcType="BIGINT" property="taskId" />
+    <result column="project_id" jdbcType="BIGINT" property="projectId" />
+    <result column="record_time" jdbcType="TIMESTAMP" property="recordTime" />
+    <result column="plan_type" jdbcType="BIT" property="planType" />
+    <result column="record_desc" jdbcType="VARCHAR" property="recordDesc" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="normal_working_hour" jdbcType="DOUBLE" property="normalWorkingHour" />
+    <result column="extra_hours" jdbcType="DOUBLE" property="extraHours" />
+    <result column="total_hours" jdbcType="DOUBLE" property="totalHours" />
+    <result column="is_finished" jdbcType="BIT" property="isFinished" />
+    <result column="finished_desc" jdbcType="VARCHAR" property="finishedDesc" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="is_delete" jdbcType="BIT" property="isDelete" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, task_id, project_id, record_time, plan_type, record_desc, start_time, 
+    end_time, normal_working_hour, extra_hours, total_hours, is_finished, finished_desc, 
+    creator, create_time, modifier, modify_time, status, is_delete
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dr_daily_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from dr_daily_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="onlyfun.js.domain.DailyRecord">
+    insert into dr_daily_record (id, user_id, task_id, 
+      project_id, record_time, plan_type, 
+      record_desc, start_time, end_time, 
+      normal_working_hour, extra_hours, total_hours, 
+      is_finished, finished_desc, creator, 
+      create_time, modifier, modify_time, 
+      status, is_delete)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{taskId,jdbcType=BIGINT}, 
+      #{projectId,jdbcType=BIGINT}, #{recordTime,jdbcType=TIMESTAMP}, #{planType,jdbcType=BIT}, 
+      #{recordDesc,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{normalWorkingHour,jdbcType=DOUBLE}, #{extraHours,jdbcType=DOUBLE}, #{totalHours,jdbcType=DOUBLE}, 
+      #{isFinished,jdbcType=BIT}, #{finishedDesc,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifier,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=BIT}, #{isDelete,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="onlyfun.js.domain.DailyRecord">
+    insert into dr_daily_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="recordTime != null">
+        record_time,
+      </if>
+      <if test="planType != null">
+        plan_type,
+      </if>
+      <if test="recordDesc != null">
+        record_desc,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="normalWorkingHour != null">
+        normal_working_hour,
+      </if>
+      <if test="extraHours != null">
+        extra_hours,
+      </if>
+      <if test="totalHours != null">
+        total_hours,
+      </if>
+      <if test="isFinished != null">
+        is_finished,
+      </if>
+      <if test="finishedDesc != null">
+        finished_desc,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifier != null">
+        modifier,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="taskId != null">
+        #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="recordTime != null">
+        #{recordTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planType != null">
+        #{planType,jdbcType=BIT},
+      </if>
+      <if test="recordDesc != null">
+        #{recordDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="normalWorkingHour != null">
+        #{normalWorkingHour,jdbcType=DOUBLE},
+      </if>
+      <if test="extraHours != null">
+        #{extraHours,jdbcType=DOUBLE},
+      </if>
+      <if test="totalHours != null">
+        #{totalHours,jdbcType=DOUBLE},
+      </if>
+      <if test="isFinished != null">
+        #{isFinished,jdbcType=BIT},
+      </if>
+      <if test="finishedDesc != null">
+        #{finishedDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="onlyfun.js.domain.DailyRecord">
+    update dr_daily_record
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="taskId != null">
+        task_id = #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="recordTime != null">
+        record_time = #{recordTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planType != null">
+        plan_type = #{planType,jdbcType=BIT},
+      </if>
+      <if test="recordDesc != null">
+        record_desc = #{recordDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="normalWorkingHour != null">
+        normal_working_hour = #{normalWorkingHour,jdbcType=DOUBLE},
+      </if>
+      <if test="extraHours != null">
+        extra_hours = #{extraHours,jdbcType=DOUBLE},
+      </if>
+      <if test="totalHours != null">
+        total_hours = #{totalHours,jdbcType=DOUBLE},
+      </if>
+      <if test="isFinished != null">
+        is_finished = #{isFinished,jdbcType=BIT},
+      </if>
+      <if test="finishedDesc != null">
+        finished_desc = #{finishedDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null">
+        modifier = #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="onlyfun.js.domain.DailyRecord">
+    update dr_daily_record
+    set user_id = #{userId,jdbcType=BIGINT},
+      task_id = #{taskId,jdbcType=BIGINT},
+      project_id = #{projectId,jdbcType=BIGINT},
+      record_time = #{recordTime,jdbcType=TIMESTAMP},
+      plan_type = #{planType,jdbcType=BIT},
+      record_desc = #{recordDesc,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      normal_working_hour = #{normalWorkingHour,jdbcType=DOUBLE},
+      extra_hours = #{extraHours,jdbcType=DOUBLE},
+      total_hours = #{totalHours,jdbcType=DOUBLE},
+      is_finished = #{isFinished,jdbcType=BIT},
+      finished_desc = #{finishedDesc,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modifier = #{modifier,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=BIT},
+      is_delete = #{isDelete,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="onlyfun.js.domain.DailyRecord">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="task_id" jdbcType="BIGINT" property="taskId" />
+    <result column="project_id" jdbcType="BIGINT" property="projectId" />
+    <result column="record_time" jdbcType="TIMESTAMP" property="recordTime" />
+    <result column="plan_type" jdbcType="BIT" property="planType" />
+    <result column="record_desc" jdbcType="VARCHAR" property="recordDesc" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="normal_working_hour" jdbcType="DOUBLE" property="normalWorkingHour" />
+    <result column="extra_hours" jdbcType="DOUBLE" property="extraHours" />
+    <result column="total_hours" jdbcType="DOUBLE" property="totalHours" />
+    <result column="is_finished" jdbcType="BIT" property="isFinished" />
+    <result column="finished_desc" jdbcType="VARCHAR" property="finishedDesc" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modifier" jdbcType="VARCHAR" property="modifier" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="is_delete" jdbcType="BIT" property="isDelete" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, task_id, project_id, record_time, plan_type, record_desc, start_time, 
+    end_time, normal_working_hour, extra_hours, total_hours, is_finished, finished_desc, 
+    creator, create_time, modifier, modify_time, status, is_delete
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dr_daily_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from dr_daily_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="onlyfun.js.domain.DailyRecord">
+    insert into dr_daily_record (id, user_id, task_id, 
+      project_id, record_time, plan_type, 
+      record_desc, start_time, end_time, 
+      normal_working_hour, extra_hours, total_hours, 
+      is_finished, finished_desc, creator, 
+      create_time, modifier, modify_time, 
+      status, is_delete)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{taskId,jdbcType=BIGINT}, 
+      #{projectId,jdbcType=BIGINT}, #{recordTime,jdbcType=TIMESTAMP}, #{planType,jdbcType=BIT}, 
+      #{recordDesc,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
+      #{normalWorkingHour,jdbcType=DOUBLE}, #{extraHours,jdbcType=DOUBLE}, #{totalHours,jdbcType=DOUBLE}, 
+      #{isFinished,jdbcType=BIT}, #{finishedDesc,jdbcType=VARCHAR}, #{creator,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifier,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=BIT}, #{isDelete,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="onlyfun.js.domain.DailyRecord">
+    insert into dr_daily_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="projectId != null">
+        project_id,
+      </if>
+      <if test="recordTime != null">
+        record_time,
+      </if>
+      <if test="planType != null">
+        plan_type,
+      </if>
+      <if test="recordDesc != null">
+        record_desc,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="normalWorkingHour != null">
+        normal_working_hour,
+      </if>
+      <if test="extraHours != null">
+        extra_hours,
+      </if>
+      <if test="totalHours != null">
+        total_hours,
+      </if>
+      <if test="isFinished != null">
+        is_finished,
+      </if>
+      <if test="finishedDesc != null">
+        finished_desc,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifier != null">
+        modifier,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="taskId != null">
+        #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="projectId != null">
+        #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="recordTime != null">
+        #{recordTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planType != null">
+        #{planType,jdbcType=BIT},
+      </if>
+      <if test="recordDesc != null">
+        #{recordDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="normalWorkingHour != null">
+        #{normalWorkingHour,jdbcType=DOUBLE},
+      </if>
+      <if test="extraHours != null">
+        #{extraHours,jdbcType=DOUBLE},
+      </if>
+      <if test="totalHours != null">
+        #{totalHours,jdbcType=DOUBLE},
+      </if>
+      <if test="isFinished != null">
+        #{isFinished,jdbcType=BIT},
+      </if>
+      <if test="finishedDesc != null">
+        #{finishedDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="onlyfun.js.domain.DailyRecord">
+    update dr_daily_record
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="taskId != null">
+        task_id = #{taskId,jdbcType=BIGINT},
+      </if>
+      <if test="projectId != null">
+        project_id = #{projectId,jdbcType=BIGINT},
+      </if>
+      <if test="recordTime != null">
+        record_time = #{recordTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="planType != null">
+        plan_type = #{planType,jdbcType=BIT},
+      </if>
+      <if test="recordDesc != null">
+        record_desc = #{recordDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="normalWorkingHour != null">
+        normal_working_hour = #{normalWorkingHour,jdbcType=DOUBLE},
+      </if>
+      <if test="extraHours != null">
+        extra_hours = #{extraHours,jdbcType=DOUBLE},
+      </if>
+      <if test="totalHours != null">
+        total_hours = #{totalHours,jdbcType=DOUBLE},
+      </if>
+      <if test="isFinished != null">
+        is_finished = #{isFinished,jdbcType=BIT},
+      </if>
+      <if test="finishedDesc != null">
+        finished_desc = #{finishedDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null">
+        modifier = #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="onlyfun.js.domain.DailyRecord">
+    update dr_daily_record
+    set user_id = #{userId,jdbcType=BIGINT},
+      task_id = #{taskId,jdbcType=BIGINT},
+      project_id = #{projectId,jdbcType=BIGINT},
+      record_time = #{recordTime,jdbcType=TIMESTAMP},
+      plan_type = #{planType,jdbcType=BIT},
+      record_desc = #{recordDesc,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      normal_working_hour = #{normalWorkingHour,jdbcType=DOUBLE},
+      extra_hours = #{extraHours,jdbcType=DOUBLE},
+      total_hours = #{totalHours,jdbcType=DOUBLE},
+      is_finished = #{isFinished,jdbcType=BIT},
+      finished_desc = #{finishedDesc,jdbcType=VARCHAR},
+      creator = #{creator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modifier = #{modifier,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=BIT},
+      is_delete = #{isDelete,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!-- 扫描controller（controller层注入） -->
+    <context:component-scan base-package="onlyfun.js.controller"/>
+
+    <!-- 避免IE在ajax请求时，返回json出现下载 -->
+    <bean id="jacksonMessageConverter"
+          class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/html;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 -->
+    <!-- 定义注解驱动Controller方法处理适配器 ,注：该适配器必须声明在<mvc:annotation-driven />之前，否则不能正常处理参数类型的转换 -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>text/html;charset=UTF-8</value>
+                            <value>application/json;charset=UTF-8</value>
+                        </list>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+    <!--
+        会自动注册RequestMappingHandlerMapping与RequestMappingHandlerAdapter
+        两个bean,是spring MVC为@Controllers分发请求所必须的。 并提供了：数据绑定支持，
+        @NumberFormatannotation支持，@DateTimeFormat支持，@Valid支持，读写XML的支持（JAXB），
+        读写JSON的支持（Jackson）
+    -->
+    <mvc:annotation-driven />
+    <!-- 资源访问处理器 -->
+    <mvc:resources mapping="/resources/**" location="/WEB-INF/resources/" />
+    <!-- 对模型视图添加前后缀 -->
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass"
+                  value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+</beans>
